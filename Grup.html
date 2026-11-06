@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+  <title>INVIRSON</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;800&family=Italiana&display=swap"
+    rel="stylesheet">
+  <script src="https://unpkg.com/feather-icons"></script>
+
+  <style type="text/tailwindcss">
+    @theme {
+    --font-sans: 'inter',system-ui, sans-serif;
+    --font-italiana: 'italiana',serif;
+    --color-card: var(--card);
+    --color-ink: var(--ink);
+    --color-mute: var(--mute);
+    --color-line: var(--line);
+  }
+  </style>
+  <style>
+    :root {
+      --bg: #959c9ca7;
+      --card: #909192;
+      --ink: #323030;
+      --mute: #44444e;
+      --line: #848174;
+      --a1: #181816;
+      --a2: #686040;
+
+      box-sizing: border-box;
+      padding-top: env(safe-area-inset-top, 0px);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #FFFDD0;
+        --card: #e7e8ec;
+        --ink: #786666;
+        --mute: #51535e;
+        --line: #FFFDD0;
+        --a1: #272624;
+        --a2: #5c5c54;
+        color-scheme: dark;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+      scroll-padding-top: env(safe-area-inset, 0px);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--ink);
+    }
+
+    .grad {
+      background: linear-gradient(125deg, var(--a1), var(--a2));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .gbg {
+      background: linear-gradient(125deg, var(--a1), var(--a2));
+    }
+
+    .bg-animated {
+      background: linear-gradient(120deg, var(--a1), var(--a2), var(--a1));
+      background-size: 200% 200%;
+      animation: geser 10s ease infinite;
+      opacity: .10;
+    }
+
+    @keyframes geser {
+
+      0%,
+      100% {
+        background-position: 0% 50%;
+      }
+
+      50% {
+        background-position: 100% 50%;
+      }
+    }
+
+    .fade {
+      animation: up .8s ease both;
+    }
+
+    @keyframes up {
+      from {
+        opacity: 0;
+        transform: translateY(10px);
+      }
+
+      to {
+        opacity: 1;
+        transform: none
+      }
+    }
+
+    @media(prefers-reduced-motion: reduce) {
+      .fade .bg-animated {
+        animation: none
+      }
+    }
+  </style>
+</head>
+
+<body class="font-sans antialiased">
+  <nav class="sticky top-0 z-20 backdrop-blur bg-[color:var(--bg)]/70 border-b border-line">
+    <div class="max-w-5xl mx-auto px-5 h-14 flex items-center justify-between">
+      <a href="#home" class="font-bold grad text-lg">INVIRSON</a>
+
+      <div class="sm:flex gap-6 text-sm text-mute">
+        <a class="hover:text-ink" href="#tentang">Admin</a>
+        <a class="hover:text-ink" href="#acara">acara</a>
+      </div>
+    </div>
+  </nav>
+
+  <header id="home" class="relative overflow-hidden">
+    <div class="relative max-w-5xl mx-auto px-5 py-20 sm:py-28
+                grid sm:grid-cols-5 gap-10 items-center ">
+
+      <!-- Kolom kiri: teks (lebar 3 dari 5 kolom) -->
+      <div class="sm:col-span-3">
+        <span class="inline-block text-xs font-medium px-3 py-1 rounded-full border border-line bg-card text-mute">
+          Selamat Datang!
+        </span>
+
+        <h1 class="mt-5 text-3xl sm:text-5xl font-extrabold leading-tight">
+          INVIRSON <span class="grad">MEMBER</span>
+        </h1>
+
+        <p class="mt-3 text-lg sm:text-xl text-mute">
+          Anggota.
+          <span id="type" class="text-ink font-semibold"></span>
+          <span class="animate-pulse cursor">|</span>
+        </p>
+
+        <p class="mt-5 text-mute max-w-xl">
+          Web ini Untuk Memperkenalkan Kalian Pada Dunia Digital,Serta untuk Menjaga Hubungan
+          Silaturahmi <span class="italic">(bagi yang Ingin Memegang Web Ini Dimohon Untuk Chat Pribadi Dengan
+            Saya)</span>
+        </p>
+      </div>
+
+      <div class="sm:col-span-2 flex justify-center fade" style="animation-delay:.15s">
+        <div class="relative">
+          <div class="absolute -inset-2 rounded-3xl gbg blur-lg opacity-60"></div>
+
+        <article class="aspect-square rounded-2xl overflow-hidden border border-line bg-card ">
+          <img src="c:\Users\AKHDAN\Downloads\WhatsApp Image 2026-11-22 at 10.06.41.jpeg" alt="Kenangan 1" class="w-60 h-full object-cover">
+        </article>
+        </div>
+      </div>
+    </div>
+  </header>
+  <script>
+    const words = ["WEB ANGKATAN", "PENGINGAT KENANGAN BERSAMA", "SUATU SAAT NANTI"];
+    const el = document.getElementById('type');
+    let w = 0, c = 0, hapus = false;
+
+    function ketik() {
+      const kata = words[w];
+      el.textContent = kata.slice(0, c);
+
+      if (!hapus && c < kata.length) { c++; setTimeout(ketik, 50); }
+      else if (!hapus) { hapus = true; setTimeout(ketik, 1200); }
+      else if (c > 0) { c--; setTimeout(ketik, 150); }
+      else { hapus = false; w = (w + 1) % words.length; setTimeout(ketik, 300); }
+    }
+    ketik();
+  </script>
+  <section id="kenangan" class="py-16 sm:py-24">
+    <div class="max-w-5xl mx-auto px-5">
+
+      <h2 class="text-3xl sm:text-5xl font-extrabold leading-tight">
+        Kenang <span class="grad">Kenangan</span>
+      </h2>
+      <p class="mt-3 text-mute max-w-xl">Tempat menyimpan momen-momen kita bersama.</p>
+
+      <!-- Kolom foto: 2 kolom di HP, 3 kolom di layar besar -->
+      <div class="mt-10 grid grid-cols-2 sm:grid-cols-3 gap-4">
+
+        <!-- Satu kolom foto -->
+        <article class="aspect-square rounded-2xl overflow-hidden border border-line bg-card">
+          <img src="foto/1.jpg" alt="Kenangan 1" class="w-full h-full object-cover">
+        </article>
+
+        <article class="aspect-square rounded-2xl overflow-hidden border border-line bg-card">
+          <img src="foto/2.jpg" alt="Kenangan 2" class="w-full h-full object-cover">
+        </article>
+
+        <article class="aspect-square rounded-2xl overflow-hidden border border-line bg-card">
+          <img src="foto/3.jpg" alt="Kenangan 3" class="w-full h-full object-cover">
+        </article>
+
+        <!-- Kolom kosong (placeholder) sebelum fotonya ada -->
+        <article class="aspect-square rounded-2xl border border-line bg-card
+                      grid place-items-center text-mute">
+          <i data-feather="image"></i>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <script>
+    feather.replace();
+  </script>
+</body>
+
+</html>
